@@ -1,5 +1,6 @@
 	
 const array = addKeyboardLayout("qwertyuiop[]asdfghjkl;'zxcvbnm,./");
+debugger
 let secondTask = getRandCharInRow(prompt("Insert number of row",""));
 let thirdTask = getRandCharInAlph();
 
@@ -19,8 +20,9 @@ function addKeyboardLayout(alphabet) {
 
 function getRandCharInRow(row) {
 	let symbhol;
+	debugger
 
-	while(symbhol) {
+	while(!symbhol) {
 		symbhol = array[row][Math.floor(Math.random() * 11)];
 	}
 
@@ -28,5 +30,6 @@ function getRandCharInRow(row) {
 }
 
 function getRandCharInAlph()  {
+	debugger
 	return getRandCharInRow([Math.floor(Math.random() * 3)]);
 }
