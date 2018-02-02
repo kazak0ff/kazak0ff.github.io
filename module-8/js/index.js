@@ -24,8 +24,7 @@ const onClick = (event) => {
 	if(keys.includes(key)) {
     buttons.forEach(element => {
       if(element.innerText === key) {
-        debugger
-         if(document.querySelector("span").checked = true) {
+         if(document.getElementById("slideThree").checked === true) {
           playSound(element.getAttribute("data-note"));
          }
         element.classList.add("keyboard__btn--active");
