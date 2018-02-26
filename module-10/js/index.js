@@ -6,19 +6,22 @@ const charsArr = string.split("");
 const timerOutput = document.querySelector(".timer");
 const exercise = document.querySelector(".exercise");
 const keyboard = document.querySelector(".keyboard");
-let bestResult= document.querySelector(".best_result");
+let bestResult = document.querySelector(".best_result");
 
 exercise.textContent = string;
 bestResult.textContent = `Best Result = ${localStorage.getItem('winner')}`;
-let timer = setInterval(() => {
-  iterator++;
-  timerOutput.textContent = iterator;
-}, 1000)
+let timer;
 
-window.addEventListener ("keydown", function(e) {
+
+window.addEventListener("keydown", function (e) {
   let check = true;
-  
-  if(charsArr.includes(e.key)) {
+  if (allCorrectInput.length == 0) {
+    timer = setInterval(() => {
+      iterator++;
+      timerOutput.textContent = iterator;
+    }, 1000)
+  }
+  if (charsArr.includes(e.key)) {
     allCorrectInput.push(e.key);
   } else {
     alert(`symbol ${e.key} not in exercise string, game over`);
@@ -26,7 +29,7 @@ window.addEventListener ("keydown", function(e) {
   }
   if (allCorrectInput.length == 5) {
     this.clearInterval(timer);
-    for(const symbol of allCorrectInput) {
+    for (const symbol of allCorrectInput) {
       if (symbol != charsArr[allCorrectInput.indexOf(symbol)]) {
         check = false;
       }
@@ -37,5 +40,5 @@ window.addEventListener ("keydown", function(e) {
 
     }
   }
-  
+
 })
