@@ -25,7 +25,7 @@ function fillDetails(array) {
     debugger
     let detailTitle = document.createElement('p');
     detailTitle.classList.add('details__name');
-    detailTitle.textContent = "Details of select Service";
+    detailTitle.textContent = `player ${service.id}`;
     details.append(detailTitle);
     let keys = Object.keys(service);
     for (const key of keys) {
@@ -57,68 +57,63 @@ function createKeyParamDivs(key, service) {
 }
 
 function getUsers() {
-  debugger
-  fetch('http://fecore.net.ua/rest', {
-    method: 'get',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'X-Custom-Header': 'custom value'
-    })
+  fetch("http://fecore.net.ua/rest/", {
+    method: "get"
   })
-    .then(dataWrappedByPromise => dataWrappedByPromise.json())
+    .then(response => {
+      if (response.ok) return response.json();
+      throw new Error("Error fetching data");
+    })
     .then(data => {
-      debugger
       futureArray = JSON.parse(JSON.stringify(data));
       fillDetails(futureArray);
     })
+    .catch(error => {
+      console.error("Error: ", error);
+    });
 }
 
 function addUser(name, score) {
-  debugger
-  fetch(`${baseUrl}/?action=1&name=${name}&score=${score}`, {
-    method: "post",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'mode': 'no-cors'
-    }
+  fetch(`${baseUrl}/?action=1&name=${name}&score=${score}`)
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("Error fetching data");
   })
-    .then(dataWrappedByPromise => dataWrappedByPromise.json())
-    .then(data => {
-      futureArray = JSON.parse(JSON.stringify(data));
-      fillDetails(futureArray);
-    })
+  .then(data => {
+    futureArray = JSON.parse(JSON.stringify(data));
+    fillDetails(futureArray);
+  })
+  .catch(error => {
+    console.error("Error: ", error);
+  });
 }
 
-
 function updateUser(id, name, score) {
-  fetch(`${baseUrl}/?action=2&id=${id}&name=${name}&score=${score}`, {
-    method: "put",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'mode': 'no-cors'
-    }
+  fetch(`${baseUrl}/?action=2&id=${id}&name=${name}&score=${score}`)
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("Error fetching data");
   })
-    .then(dataWrappedByPromise => dataWrappedByPromise.json())
-    .then(data => {
-      futureArray = JSON.parse(JSON.stringify(data));
-      fillDetails(futureArray);
-    })
+  .then(data => {
+    futureArray = JSON.parse(JSON.stringify(data));
+    fillDetails(futureArray);
+  })
+  .catch(error => {
+    console.error("Error: ", error);
+  });
 }
 
 function removeUser(id) {
-  fetch(`${baseUrl}/?action=3&id=${id}`, {
-    method: "delete",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'mode': 'no-cors'
-    }
+  fetch(`${baseUrl}/?action=3&id=${id}`)
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("Error fetching data");
   })
-    .then(dataWrappedByPromise => dataWrappedByPromise.json())
-    .then(data => {
-      futureArray = JSON.parse(JSON.stringify(data));
-      fillDetails(futureArray);
-    })
+  .then(data => {
+    futureArray = JSON.parse(JSON.stringify(data));
+    fillDetails(futureArray);
+  })
+  .catch(error => {
+    console.error("Error: ", error);
+  });
 }
