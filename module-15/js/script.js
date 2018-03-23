@@ -1,32 +1,50 @@
-function Timer (startTime, stoptTime, interval) {
-    this.startTime = startTime;
-    this.stoptTime = stoptTime;
-    this.interval = interval;
-}
+class Timer {
+    constructor(startTime, stopTime, interval) {
+        this.startTime = startTime;
+        this.stopTime = stopTime;
+        this.interval = interval;
+    }
 
-Timer.prototype.start = function () {
-    var d = new Date();
-    this.startTime = d.getTime();
-}
+    start() {
+        var d = new Date();
+        this.startTime = d.getTime();
+    }
 
-Timer.prototype.stop = function () {
-    var d = new Date();
-    this.startTime = d.getTime();
-    this.interval = this.stoptTime - this.startTime;
-    console.log(new Date(this.interval).toString);
-}
+    stop() {
+        var d = new Date();
+        this.stopTime = d.getTime();
+        this.interval = this.stopTime - this.startTime;
+        console.log(this.interval);
+    }
 
-let timer = new Timer(null, null, null);
+    getTime() {
+        console.log(interval)
+    }
+
+    static timeToNY() {
+        var d = new Date();
+        var ny = new Date("December 31 2018 23:59")
+        return (ny.getTime() - d.getTime())/86400000;
+    }
+ }
+
+
+ let timer1 = new Timer(333, 222, 111);
+ let timer2 = new Timer(444, 333, 111);
+ let timer3 = new Timer(555, 444, 111);
+
+
+ let stopwatch = new Timer(null, null, null);
+
 
 const onClick = (event) => {
-    debugger
     if (event.target.classList.contains("button_start")) {
-        debugger
-        timer.start();
+        stopwatch.start();
     } else if (event.target.classList.contains("button_stop")) {
-        debugger
-        timer.stop();
+        stopwatch.stop();
     }
   }
 
   document.addEventListener("click", onClick);
+
+  console.log(`До нового года осталось ${Math.floor(Timer.timeToNY())}дней`);
